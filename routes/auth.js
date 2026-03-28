@@ -71,7 +71,7 @@ router.post('/forgot-password',async(req,res)=>{
         user.resetPasswordToken=resetToken;
         user.resetPasswordExpires=Date.now()+3600000;
         await user.save();
-        const frontendURL="https://secret-vault-frontend-one.vercel.app/"
+        const frontendURL="https://secret-vault-frontend-ek1dsmq5v-janhvi-petramwars-projects.vercel.app/"
         const resetUrl=`${frontendURL}/reset-password/${resetToken}`;
         const message=`You are receiving this because you requested a password reset.\n\nPlease click on the following link to complete the process:\n\n${resetUrl}\n\nIf you did not request this, please ignore this email`
         try {
