@@ -58,10 +58,13 @@ router.post('/login',async(req,res)=>{
 router.post('/forgot-password',async(req,res)=>{
     console.log("Request Body:", req.body);
     try {
-        const {username}=req.body;
-        const cleanUsername = username.trim().toLowerCase(); 
-        console.log("Searching for:", cleanUsername);
-        const user=await User.findOne({username:cleanUsername});
+        const identifier = req.body.email || req.body.username;
+        console.log("Request Body received:", req.body);
+        console.log("Searching for identifier:", identifier);
+        if (!identifier) {
+            return res.status(400).json({ msg: "Please provide an email/username" });
+        }
+        const user=await User.findOne({username:identifier});
         console.log("User Found in DB:", user);
         if(!user) return res.status(404).json({msg: "User not found"});
         const resetToken=crypto.randomBytes(20).toString('hex');
