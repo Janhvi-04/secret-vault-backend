@@ -59,7 +59,9 @@ router.post('/forgot-password',async(req,res)=>{
     console.log("Request Body:", req.body);
     try {
         const {username}=req.body;
-        const user=await User.findOne({username});
+        const cleanUsername = username.trim().toLowerCase(); 
+        console.log("Searching for:", cleanUsername);
+        const user=await User.findOne({username:cleanUsername});
         console.log("User Found in DB:", user);
         if(!user) return res.status(404).json({msg: "User not found"});
         const resetToken=crypto.randomBytes(20).toString('hex');
