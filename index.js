@@ -8,7 +8,7 @@ dotenv.config();
 const app=express();
 const PORT=process.env.PORT || 5000;
 app.use(cors({
-    origin: "https://secret-vault-frontend-one.vercel.app",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
