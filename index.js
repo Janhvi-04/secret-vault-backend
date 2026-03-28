@@ -1,3 +1,8 @@
+console.log("Backend is running...");
+app.use((req, res, next) => {
+  console.log(`${req.method} request to ${req.url}`);
+  next();
+});
 const authRoutes=require('./routes/auth');
 const secretRoutes=require('./routes/secrets')
 const express=require('express');
